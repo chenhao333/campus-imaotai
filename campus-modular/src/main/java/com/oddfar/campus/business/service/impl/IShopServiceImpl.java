@@ -108,6 +108,7 @@ public class IShopServiceImpl extends ServiceImpl<IShopMapper, IShop> implements
             JSONObject data = jsonObject.getJSONObject("data");
             mtSessionId = data.getString("sessionId");
             redisCache.setCacheObject("mt_session_id", mtSessionId);
+            redisCache.expire("mt_session_id", 60, TimeUnit.MINUTES);
 
             iItemMapper.truncateItem();
             //item插入数据库
